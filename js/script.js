@@ -34,7 +34,8 @@ function generateRandomWord() {
 
 // Funktion som tar fram bokstävernas rutor, antal rutor beror på vilket ord slumptas fram
 function createLetterBoxes() {
-    letterBoxEls = document.querySelector(letterBoxes[ul])
+    let letterBoxEls = document.querySelector('#letterBoxes')
+    letterBoxEls.appendChild(letterBoxEls)
 };
 // Funktion som körs när du trycker på bokstäverna och gissar bokstav
 // Funktion som ropas vid vinst eller förlust, gör olika saker beroende tillståndet
