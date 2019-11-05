@@ -1,10 +1,10 @@
 // Globala variabler
 
 // Array: med spelets alla ord
-const wordList = [hello] [goodbye] [philiprocks];
+const wordList = ['hello', 'goodbye', 'philiprocks'];
 
 // Sträng: ett av orden valt av en slumpgenerator från arrayen ovan
-let selectedWord;    
+let selectedWord = generateRandomWord;    
 
 // Number: håller antalet gissningar som gjorts
 let guesses = 0;
@@ -29,7 +29,7 @@ startGameBtnEl.addEventListener('click', callbackFn);
 
 // Funktion som slumpar fram ett ord
 function generateRandomWord() {
-    wordList[Math.floor(Math.random()*wordList.length)];
+    return wordList[Math.floor(Math.random()*wordList.length)];
 };
 
 // Funktion som tar fram bokstävernas rutor, antal rutor beror på vilket ord slumptas fram
