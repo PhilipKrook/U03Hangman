@@ -4,7 +4,7 @@
 const wordList = ['hello', 'goodbye', 'philiprocks'];
 
 // Sträng: ett av orden valt av en slumpgenerator från arrayen ovan
-let selectedWord = generateRandomWord;    
+let selectedWord = generateRandomWord();    
 
 // Number: håller antalet gissningar som gjorts
 let guesses = 0;
@@ -16,7 +16,7 @@ let hangmanImg;
 let msgHolderEl;     
 
 // DOM-nod: knappen som du startar spelet med
-let startGameBtnEl = document.querySelector(startGameBtn);
+let startGameBtnEl = document.querySelector('#startGameBtn');
 
 // Array av DOM-noder: Knapparna för bokstäverna
 let letterButtonEls; 
@@ -25,7 +25,7 @@ let letterButtonEls;
 let letterBoxEls;    
 
 // Funktion som startar spelet vid knapptryckning, och då tillkallas andra funktioner
-startGameBtnEl.addEventListener('click', callbackFn);
+// startGameBtnEl.addEventListener('click', callbackFn);    *************************
 
 // Funktion som slumpar fram ett ord
 function generateRandomWord() {
@@ -34,10 +34,11 @@ function generateRandomWord() {
 
 // Funktion som tar fram bokstävernas rutor, antal rutor beror på vilket ord slumptas fram
 function createLetterBoxes() {
-    letterBoxEls = document.querySelector(letterBoxes > ul);
-    for ( i = 0, i < selectedWord.length, i++ ) {
-        letterBoxEls.appendChild(letterBoxEls);
-    };    
+    letterBoxEls = document.querySelector('#letterBoxes > ul');
+    for ( i = 0; i < selectedWord.length; i++ ) {
+            let newElement = document.createElement('li')
+        letterBoxEls.appendChild(newElement);
+    };
 };
 
 // Funktion som körs när du trycker på bokstäverna och gissar bokstav
