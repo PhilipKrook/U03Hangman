@@ -4,7 +4,7 @@
 const wordList = ['hello', 'goodbye', 'philiprocks'];
 
 // Sträng: ett av orden valt av en slumpgenerator från arrayen ovan
-let selectedWord = generateRandomWord();
+let selectedWord = ''; // generateRandomWord();
 // Number: håller antalet gissningar som gjorts
 let guesses = 0;
 
@@ -15,7 +15,7 @@ let hangmanImg;
 let msgHolderEl;     
 
 // DOM-nod: knappen som du startar spelet med
-let startGameBtnEl = document.querySelector('startGameBtn');
+let startGameBtnEl = document.querySelector('#startGameBtn');
 
 // Array av DOM-noder: Knapparna för bokstäverna
 let letterButtonEls; 
@@ -24,7 +24,7 @@ let letterButtonEls;
 let letterBoxEls;    
 
 // Funktion som startar spelet vid knapptryckning, och då tillkallas andra funktioner
-// startGameBtnEl.addEventListener('click', callbackFn);
+startGameBtnEl.addEventListener('click', startGame);
 
 // Funktion som slumpar fram ett ord
 function generateRandomWord() {
@@ -38,14 +38,31 @@ function createLetterBoxes() {
     		let newElement = document.createElement('li')
         let newInput = document.createElement('input')
         newInput.setAttribute('type', 'text')
-        newInput.setAttribute('disabled', 'true')
+        newInput.setAttribute('disabled', '')
         newElement.appendChild(newInput);
         letterBoxEls.appendChild(newElement);
     };    
 };
 
-createLetterBoxes()
+function startGame() {
+    let list = document.querySelector('#letterBoxes > ul');
+    list.innerHTML = '';
+    selectedWord = generateRandomWord();
+    createLetterBoxes()
+}
+
 
 // Funktion som körs när du trycker på bokstäverna och gissar bokstav
 // Funktion som ropas vid vinst eller förlust, gör olika saker beroende tillståndet
 // Funktion som inaktiverar/aktiverar bokstavsknapparna beroende på vilken del av spelet du är på
+
+// to do
+// 1 click button
+// -check if the letter is inside the word
+// -we disable this button
+// -if it is inside the word - show box
+// -if its not in the word set -1 on the tries
+// the images
+// button click callback
+
+// -check if guess the whole word   -> WON
