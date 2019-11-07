@@ -10,7 +10,9 @@ let selectedWord = ''; // generateRandomWord();
 let guesses = 0;
 
 // String: searchpath to imgage (and changes) wrong answer. ex. `/images/h1.png`
-let hangmanImg;      
+let hangmanImg = `images/h${guesses}.png`
+document.querySelector('#hangman')
+hangmanImg.src = 'hangmanImg'
 
 // DOM-node: logs a messange when the game is over
 let msgHolderEl;     
