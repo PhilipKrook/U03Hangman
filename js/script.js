@@ -21,7 +21,11 @@ let msgHolderEl;
 let startGameBtnEl = document.querySelector('#startGameBtn');
 
 // Array of DOM-nodes: the buttons for the letters
-let letterButtonEls; 
+let letterButtonEls = document.querySelector('btn--stripe');
+letterBoxEls.addEventListener('click', event => {
+    letterBoxEls.innerHTML = `Click count: ${event.detail}`;
+});
+console.log(event.detail);
 
 // Array of DOM-nodes: the squares which holds the letters
 let letterBoxEls;    
