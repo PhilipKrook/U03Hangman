@@ -1,37 +1,38 @@
 // Globala variabler
 
-// Array: med spelets alla ord
+// Array: whith the words 
 const wordList = ['hello', 'goodbye', 'philiprocks'];
 
-// Sträng: ett av orden valt av en slumpgenerator från arrayen ovan
+// String: with THE word the generator selects
 let selectedWord = ''; // generateRandomWord();
-// Number: håller antalet gissningar som gjorts
+
+// Number: stores the numbers of guesses
 let guesses = 0;
 
-// Sträng: sökväg till bild som kommer visas (och ändras) fel svar. t.ex. `/images/h1.png`
+// String: searchpath to imgage (and changes) wrong answer. ex. `/images/h1.png`
 let hangmanImg;      
 
-// DOM-nod: Ger meddelande när spelet är över
+// DOM-node: logs a messange when the game is over
 let msgHolderEl;     
 
-// DOM-nod: knappen som du startar spelet med
+// DOM-node: the button that starts the game
 let startGameBtnEl = document.querySelector('#startGameBtn');
 
-// Array av DOM-noder: Knapparna för bokstäverna
+// Array of DOM-nodes: the buttons for the letters
 let letterButtonEls; 
 
-// Array av DOM-noder: Rutorna där bokstäverna ska stå
+// Array of DOM-nodes: the squares which holds the letters
 let letterBoxEls;    
 
-// Funktion som startar spelet vid knapptryckning, och då tillkallas andra funktioner
+// Functions to start the game with buttonclick, and then calls other functions
 startGameBtnEl.addEventListener('click', startGame);
 
-// Funktion som slumpar fram ett ord
+// Function which randomly selects a word
 function generateRandomWord() {
     return wordList[Math.floor(Math.random()*wordList.length)];
 };
 
-// Funktion som tar fram bokstävernas rutor, antal rutor beror på vilket ord slumptas fram
+// Function to generate the letterboxes, number of boxes depends on the number of letters in the word
 function createLetterBoxes() {
     letterBoxEls = document.querySelector('#letterBoxes > ul');
     for ( i = 0; i < selectedWord.length; i++ ) {
@@ -52,9 +53,9 @@ function startGame() {
 }
 
 
-// Funktion som körs när du trycker på bokstäverna och gissar bokstav
-// Funktion som ropas vid vinst eller förlust, gör olika saker beroende tillståndet
-// Funktion som inaktiverar/aktiverar bokstavsknapparna beroende på vilken del av spelet du är på
+// Function that runs when you press a letters and guesses the letter
+// Function that gets called by winning or loosing, does different things depending on status
+// Function wthich inaktiates/activates the letterbuttons depending on which part of the game you are on
 
 // to do
 // 1 click button
