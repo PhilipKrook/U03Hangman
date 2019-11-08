@@ -19,16 +19,20 @@ let msgHolderEl;
 
 // DOM-node: the button that starts the game
 let startGameBtnEl = document.querySelector('#startGameBtn');
+letterBoxEls = document.querySelector('#letterBoxes > ul');
 
 // Array of DOM-nodes: the buttons for the letters
 let letterButtonEls = document.querySelector('btn--stripe');
 letterBoxEls.addEventListener('click', event => {
     letterBoxEls.innerHTML = `Click count: ${event.detail}`;
 });
-console.log(event.detail);
+
+for ( let i = 0; i < letterBoxEls.length; i++ ) {
+    letterBoxEls[i].addEventListener;
+};
 
 // Array of DOM-nodes: the squares which holds the letters
-let letterBoxEls;    
+// let letterBoxEls;    
 
 // Functions to start the game with buttonclick, and then calls other functions
 startGameBtnEl.addEventListener('click', startGame);
@@ -40,7 +44,6 @@ function generateRandomWord() {
 
 // Function to generate the letterboxes, number of boxes depends on the number of letters in the word
 function createLetterBoxes() {
-    letterBoxEls = document.querySelector('#letterBoxes > ul');
     for ( i = 0; i < selectedWord.length; i++ ) {
     		let newElement = document.createElement('li')
         let newInput = document.createElement('input')
