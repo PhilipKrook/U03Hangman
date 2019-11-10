@@ -11,25 +11,24 @@ let guesses = 0;
 
 // String: searchpath to imgage (and changes) wrong answer. ex. `/images/h1.png`
 let hangmanImg = `images/h${guesses}.png`
-document.querySelector('#hangman')
-hangmanImg.src = 'hangmanImg'
+let imageElement = document.querySelector('#hangman')
+imageElement.setAttribute('src', hangmanImg);
 
 // DOM-node: logs a messange when the game is over
 let msgHolderEl;     
 
 // DOM-node: the button that starts the game
 let startGameBtnEl = document.querySelector('#startGameBtn');
-letterBoxEls = document.querySelector('#letterBoxes > ul');
+wordBoxes = document.querySelector('#letterBoxes > ul');
 
 // Array of DOM-nodes: the buttons for the letters
-let letterButtonEls = document.querySelector('btn--stripe');
-letterBoxEls.addEventListener('click', event => {
-    letterBoxEls.innerHTML = `Click count: ${event.detail}`;
-});
-
-for ( let i = 0; i < letterBoxEls.length; i++ ) {
-    letterBoxEls[i].addEventListener;
-};
+let letterBoxEls = document.querySelector('#letterButtons').children;
+for (var i = 0; i < letterBoxEls.length; i++) {
+    (function(i) {
+        letterBoxEls[i].addEventListener('click', event => {
+        console.log(letterBoxEls[i].children[0].value);
+    })})(i);    
+}
 
 // Array of DOM-nodes: the squares which holds the letters
 // let letterBoxEls;    
@@ -50,7 +49,7 @@ function createLetterBoxes() {
         newInput.setAttribute('type', 'text')
         newInput.setAttribute('disabled', '')
         newElement.appendChild(newInput);
-        letterBoxEls.appendChild(newElement);
+        wordBoxes.appendChild(newElement);
     };    
 };
 
