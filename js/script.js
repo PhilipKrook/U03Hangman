@@ -1,4 +1,4 @@
-// Globala variabler
+// Global variables
 
 // Array: whith the words 
 const wordList = ['hello', 'goodbye', 'philiprocks'];
@@ -58,10 +58,22 @@ function startGame() {
     list.innerHTML = '';
     selectedWord = generateRandomWord();
     createLetterBoxes()
+    let wordSplit = selectedWord.split('');
+    console.log(wordSplit);
 }
 
 
 // Function that runs when you press a letters and guesses the letter
+function letterGuess() {
+    
+}
+
+// selectedWord = "How are you doing today?";
+let wordSplit = selectedWord.split('');
+console.log(wordSplit);
+
+
+
 // Function that gets called by winning or loosing, does different things depending on status
 // Function wthich inaktiates/activates the letterbuttons depending on which part of the game you are on
 
