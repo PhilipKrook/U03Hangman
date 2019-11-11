@@ -26,7 +26,7 @@ let letterBoxEls = document.querySelector('#letterButtons').children;
 for (var i = 0; i < letterBoxEls.length; i++) {
     (function(i) {
         letterBoxEls[i].addEventListener('click', event => {
-        console.log(letterBoxEls[i].children[0].value);
+        console.log(letterBoxEls[i].children[0].value, selectedWord);
     })})(i);    
 }
 
@@ -35,6 +35,11 @@ for (var i = 0; i < letterBoxEls.length; i++) {
 
 // Functions to start the game with buttonclick, and then calls other functions
 startGameBtnEl.addEventListener('click', startGame);
+
+
+// ---------- Behold, the functions! ---------- 
+
+
 
 // Function which randomly selects a word
 function generateRandomWord() {
@@ -53,6 +58,7 @@ function createLetterBoxes() {
     };    
 };
 
+// Function for start game and select a random word
 function startGame() {
     let list = document.querySelector('#letterBoxes > ul');
     list.innerHTML = '';
@@ -62,28 +68,35 @@ function startGame() {
     console.log(wordSplit);
 }
 
-
 // Function that runs when you press a letters and guesses the letter
-function letterGuess() {
-    
+function checkLetter(letter, selectedWord) {
+    let letters = selectedWord.split('');
+    if (letters.indexOf(letter) !== -1) {
+        correctGuessAction(letter);
+    } else {
+        wrongGuessAction();
+    }
+};
+
+// Function that does something usefull, I'm sure
+function correctGuessAction(letter, letters) {
+    let occurances = []
+    for (let i = 0; i < letters.length; i++) {
+
+    }
 }
 
-// selectedWord = "How are you doing today?";
-let wordSplit = selectedWord.split('');
-console.log(wordSplit);
+/*  some function im not sure if its needed
+    function letterGuess() {
+    let occurances = []
+    for (let i = 0; i < wordSplit.length; i++) {
+        
+    }
+}
+*/
 
 
 
 // Function that gets called by winning or loosing, does different things depending on status
 // Function wthich inaktiates/activates the letterbuttons depending on which part of the game you are on
 
-// to do
-// 1 click button
-// -check if the letter is inside the word
-// -we disable this button
-// -if it is inside the word - show box
-// -if its not in the word set -1 on the tries
-// the images
-// button click callback
-
-// -check if guess the whole word   -> WON
