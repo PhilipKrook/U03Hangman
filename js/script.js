@@ -66,6 +66,9 @@ function startGame() {
     createLetterBoxes()
     let wordSplit = selectedWord.split('');
     console.log(wordSplit);
+
+    addLetterClickHandlers(selectedWord);
+
 }
 
 // Function that runs when you press a letters and guesses the letter
@@ -76,7 +79,7 @@ function checkLetter(letter, selectedWord) {
     } else {
         wrongGuessAction();
     }
-};
+}
 
 // Function that does something usefull, I'm sure
 function correctGuessAction(letter, letters) {
@@ -85,6 +88,19 @@ function correctGuessAction(letter, letters) {
 
     }
 }
+
+// Function for click handlers
+function addLetterClickHandlers() {
+    for (var i = 0; i < letterBoxEls.length; i++) {
+        (function(i) {
+            letterBoxEls[i].addEventListener('click', event => {
+            console.log(letterBoxEls[i].children[0].value);
+        })})(i);
+    }
+}
+
+
+
 
 /*  some function im not sure if its needed
     function letterGuess() {
