@@ -76,6 +76,8 @@ function correctGuessAction(letter, letters) {
   for (let i = 0; i < letters.length; i++) {
     if (letter == letters[i]) {
       correctLetters++;
+      //add the letters to the boxes somehow
+      //and print "win" when the word is full. selectedWord.length == correctLetters perhaps?
     }
   }
 }
