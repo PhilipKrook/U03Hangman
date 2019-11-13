@@ -1,17 +1,17 @@
 // Global variables
 let correctLetters = 0;
 let guesses = 0;
+let selectedWord = '';
 
 // Array: whith the words
-const wordList = ["HELLO", "GOODBYE", "WELCOME"];
-
-// String: with THE word the generator selects
-let selectedWord = ""; // generateRandomWord();
+const wordList = ["HELLO", "GOODBYE", "HAAAAANGMAAAN"];
 
 // String: searchpath to imgage (and changes) wrong answer. ex. `/images/h1.png`
+/*
 let hangmanImg = `images/h${guesses}.png`;
 let imageElement = document.querySelector("#hangman");
 imageElement.setAttribute("src", hangmanImg);
+*/
 
 // DOM-node: logs a messange when the game is over
 let msgHolderEl = "Game Over";
@@ -60,8 +60,8 @@ function startGame() {
 // Function that runs when you press a letters and guesses the letter
 function checkLetter(letter, selectedWord) {
   let letters = selectedWord.split("");
-  console.log(letter)
-  console.log(selectedWord)
+  console.log(letter);
+  console.log(selectedWord);
   if (letters.indexOf(letter) !== -1) {
     correctGuessAction(letter, letters);
   } else {
@@ -70,44 +70,40 @@ function checkLetter(letter, selectedWord) {
   console.log(letter);
 }
 
-
 // Function for correct answers
 function correctGuessAction(letter, letters) {
   let occurances = [];
-  for (let i = 0; i < letters.length; i++) {   
+  for (let i = 0; i < letters.length; i++) {
     if (letter == letters[i]) {
       correctLetters++;
     }
-  } 
+  }
 }
 
 // Function for wrong answers and pictures
 function wrongGuessAction() {
   guesses++;
-  if (guesses > 6) {
+  // for testing
+  console.log(guesses);
+  if (guesses <= 6) {    
+    let hangmanImg = `images/h${guesses}.png`;
+    let imageElement = document.querySelector("#hangman");
+    imageElement.setAttribute("src", hangmanImg);    
+  } if (guesses == 6) {
     // game over
-    console.log(msgHolderEl);
-  } else {
-    // for each guess add 1 to guesses
-    // and add hangman image equals to amount of guesses
-    console.log(guesses);
+    console.log(msgHolderEl);    
   }
 }
 
 // Function for click handlers
-function addLetterClickHandlers(selectedWord) { 
+function addLetterClickHandlers(selectedWord) {
   for (var i = 0; i < letterBoxEls.length; i++) {
-      letterBoxEls.item(i).children[0].addEventListener("click", event => {
-        event.srcElement .setAttribute("disabled", "");
-        checkLetter(event.srcElement.value, selectedWord);
-        
-        
-      });
-    };
+    letterBoxEls.item(i).children[0].addEventListener("click", event => {
+      event.srcElement.setAttribute("disabled", "");
+      checkLetter(event.srcElement.value, selectedWord);
+    });
   }
-
-
-
+}
 
 // Function that gets called by winning or loosing, does different things depending on status
 // Function wthich inaktiates/activates the letterbuttons depending on which part of the game you are on
