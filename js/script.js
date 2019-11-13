@@ -1,13 +1,12 @@
 // Global variables
+let correctLetters = 0;
+let guesses = 0;
 
 // Array: whith the words
-const wordList = ["hello", "goodbye", "welcome"];
+const wordList = ["HELLO", "GOODBYE", "WELCOME"];
 
 // String: with THE word the generator selects
 let selectedWord = ""; // generateRandomWord();
-
-// Number: stores the numbers of guesses
-let guesses = 0;
 
 // String: searchpath to imgage (and changes) wrong answer. ex. `/images/h1.png`
 let hangmanImg = `images/h${guesses}.png`;
@@ -15,7 +14,7 @@ let imageElement = document.querySelector("#hangman");
 imageElement.setAttribute("src", hangmanImg);
 
 // DOM-node: logs a messange when the game is over
-let msgHolderEl;
+let msgHolderEl = "Game Over";
 
 // DOM-node: the button that starts the game
 let startGameBtnEl = document.querySelector("#startGameBtn");
@@ -23,9 +22,6 @@ wordBoxes = document.querySelector("#letterBoxes > ul");
 
 // Array of DOM-nodes: the buttons for the letters
 let letterBoxEls = document.querySelector("#letterButtons").children;
-
-// Array of DOM-nodes: the squares which holds the letters
-// let letterBoxEls;
 
 // Functions to start the game with buttonclick, and then calls other functions
 startGameBtnEl.addEventListener("click", startGame);
@@ -64,48 +60,54 @@ function startGame() {
 // Function that runs when you press a letters and guesses the letter
 function checkLetter(letter, selectedWord) {
   let letters = selectedWord.split("");
+  console.log(letter)
+  console.log(selectedWord)
   if (letters.indexOf(letter) !== -1) {
-    correctGuessAction(letter);
+    correctGuessAction(letter, letters);
   } else {
     wrongGuessAction();
   }
+  console.log(letter);
 }
 
-// Function that does something usefull, I'm sure
+
+// Function for correct answers
 function correctGuessAction(letter, letters) {
   let occurances = [];
-  for (let i = 0; i < letters.length; i++) {}
+  for (let i = 0; i < letters.length; i++) {   
+    if (letter == letters[i]) {
+      correctLetters++;
+    }
+  } 
 }
 
 // Function for wrong answers and pictures
 function wrongGuessAction() {
-  // innerHTML for images
-  // add guesses
-  // check if guesses < 6
+  guesses++;
+  if (guesses > 6) {
+    // game over
+    console.log(msgHolderEl);
+  } else {
+    // for each guess add 1 to guesses
+    // and add hangman image equals to amount of guesses
+    console.log(guesses);
+  }
 }
 
 // Function for click handlers
-function addLetterClickHandlers(selectedWord) {
-    for (var i = 0; i < letterBoxEls.length; i++) {
-        (function(i) {
-            letterBoxEls[i].addEventListener('click', event => {
-                letterBoxEls[i].children[0].setAttribute('disabled', '')
-                checkLetter(letterBoxEls[i].children[0].value, selectedWord);
-            })
-        })(i);
-    }
-}
-
-
-
-/*  some function im not sure if its needed
-    function letterGuess() {
-    let occurances = []
-    for (let i = 0; i < wordSplit.length; i++) {
+function addLetterClickHandlers(selectedWord) { 
+  for (var i = 0; i < letterBoxEls.length; i++) {
+      letterBoxEls.item(i).children[0].addEventListener("click", event => {
+        event.srcElement .setAttribute("disabled", "");
+        checkLetter(event.srcElement.value, selectedWord);
         
-    }
-}
-*/
+        
+      });
+    };
+  }
+
+
+
 
 // Function that gets called by winning or loosing, does different things depending on status
 // Function wthich inaktiates/activates the letterbuttons depending on which part of the game you are on
