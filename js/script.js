@@ -53,12 +53,22 @@ function startGame() {
   list.innerHTML = "";
   selectedWord = generateRandomWord();
   createLetterBoxes();
-  // resetletterButtons()
-  // resetPicture() 
+  // resetletterButtons();
+  resetPicture();
   let wordSplit = selectedWord.split("");
   console.log(wordSplit);
   wordLength = wordSplit.length;
   addLetterClickHandlers(selectedWord);
+}
+
+function resetletterButtons() {
+  letterBoxEls = 0;
+}
+
+function resetPicture() {
+  let hangmanImg = `images/h0.png`;
+  let imageElement = document.querySelector("#hangman");
+  imageElement.setAttribute("src", hangmanImg);
 }
 
 // Function that runs when you press a letters and guesses the letter
@@ -87,8 +97,6 @@ function correctGuessAction(letter, letters) {
   if (correctLetters === wordLength) {
     messageBox.innerHTML = 'YOU WIN!'
   }
-  //add the letters to the boxes somehow
-  //and print "win" when the word is full. selectedWord.length == correctLetters perhaps?
 }
 
 function showBoxes(occurances, letters) {
@@ -109,8 +117,6 @@ function wrongGuessAction() {
   let imageElement = document.querySelector("#hangman");
   imageElement.setAttribute("src", hangmanImg);    
   if (guesses === 6) {
-    // add code that stops the game
-    // Maybe disable all buttons or something
     messageBox.innerHTML = msgHolderEl;  
   }
 }
