@@ -2,7 +2,7 @@
 let correctLetters = 0;
 let wordLength = 0;
 let guesses = 0;
-let selectedWord = '';
+let selectedWord = "";
 
 // Array: whith the words
 const wordList = ["HELLO", "GOODBYE", "HAAAAANGMAAAN"];
@@ -13,7 +13,7 @@ let hangmanImg = `images/h${guesses}.png`;
 let imageElement = document.querySelector("#hangman");
 imageElement.setAttribute("src", hangmanImg);
 */
-let messageBox = document.querySelector('#message')
+let messageBox = document.querySelector("#message");
 
 // DOM-node: logs a message when the game is over
 let msgHolderEl = "Game Over";
@@ -53,7 +53,7 @@ function startGame() {
   list.innerHTML = "";
   selectedWord = generateRandomWord();
   createLetterBoxes();
-  // resetletterButtons();
+  resetletterButtons();
   resetPicture();
   let wordSplit = selectedWord.split("");
   console.log(wordSplit);
@@ -61,8 +61,11 @@ function startGame() {
   addLetterClickHandlers(selectedWord);
 }
 
-function resetletterButtons() {
-  letterBoxEls = 0;
+function resetletterButtons() {  
+  for (var i = 0; i < letterBoxEls.length; i++) {
+    letterBoxEls.item(i).children[0].disabled = false;
+    console.log(letterBoxEls.item(i).children[0])
+  }
 }
 
 function resetPicture() {
@@ -74,14 +77,11 @@ function resetPicture() {
 // Function that runs when you press a letters and guesses the letter
 function checkLetter(letter, selectedWord) {
   let letters = selectedWord.split("");
-  console.log(letter);
-  console.log(selectedWord);
   if (letters.indexOf(letter) !== -1) {
     correctGuessAction(letter, letters);
   } else {
     wrongGuessAction();
   }
-  console.log(letter);
 }
 
 // Function for correct answers
@@ -89,23 +89,23 @@ function correctGuessAction(letter, letters) {
   let occurances = [];
   for (let i = 0; i < letters.length; i++) {
     if (letter === letters[i]) {
-      occurances.push(i)
+      occurances.push(i);
       correctLetters++;
     }
   }
-  showBoxes(occurances, letters)
+  showBoxes(occurances, letters);
   if (correctLetters === wordLength) {
-    messageBox.innerHTML = 'YOU WIN!'
+    messageBox.innerHTML = "YOU WIN!";
   }
 }
 
 function showBoxes(occurances, letters) {
-  let boxes = document.querySelector('#letterBoxes').children[0].children 
-  occurances.forEach((element) => {
-    let letter = letters[element]
-    boxes[element].children[0].setAttribute('value', letter)
-    boxes[element].children[0].setAttribute('disable', false)
-  }) 
+  let boxes = document.querySelector("#letterBoxes").children[0].children;
+  occurances.forEach(element => {
+    let letter = letters[element];
+    boxes[element].children[0].setAttribute("value", letter);
+    boxes[element].children[0].setAttribute("disable", false);
+  });
 }
 
 // Function for wrong answers and pictures
@@ -115,9 +115,9 @@ function wrongGuessAction() {
   console.log(guesses);
   let hangmanImg = `images/h${guesses}.png`;
   let imageElement = document.querySelector("#hangman");
-  imageElement.setAttribute("src", hangmanImg);    
+  imageElement.setAttribute("src", hangmanImg);
   if (guesses === 6) {
-    messageBox.innerHTML = msgHolderEl;  
+    messageBox.innerHTML = msgHolderEl;
   }
 }
 
@@ -130,6 +130,3 @@ function addLetterClickHandlers(selectedWord) {
     });
   }
 }
-
-// Function that gets called by winning or loosing, does different things depending on status
-// Function wthich inaktiates/activates the letterbuttons depending on which part of the game you are on
