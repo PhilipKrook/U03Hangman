@@ -55,6 +55,7 @@ function startGame() {
   createLetterBoxes();
   resetletterButtons();
   resetPicture();
+  resetGuesses();
   let wordSplit = selectedWord.split("");
   console.log(wordSplit);
   wordLength = wordSplit.length;
@@ -72,6 +73,11 @@ function resetPicture() {
   let hangmanImg = `images/h0.png`;
   let imageElement = document.querySelector("#hangman");
   imageElement.setAttribute("src", hangmanImg);
+}
+
+function resetGuesses() {
+   correctLetters = 0;
+   guesses = 0;   
 }
 
 // Function that runs when you press a letters and guesses the letter
