@@ -1,3 +1,11 @@
+krooknet.com/u03
+
+to reset the game, reset the browser
+have fun!
+
+
+
+
 # Uppgift - Hangman
 
 Den här uppgiften går ut på att individuellt implementera ett populärt rudimentärt spel i JavaScript - "hänga gubbe". Som stöd kommer det finnas kod och en struktur att utgå ifrån vilken du kan ta till hjälp när du ska lösa uppgiften.
