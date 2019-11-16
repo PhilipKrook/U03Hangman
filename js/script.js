@@ -7,12 +7,6 @@ let selectedWord = "";
 // Array: whith the words
 const wordList = ["HELLO", "GOODBYE", "HAAAAANGMAAAN"];
 
-// String: searchpath to imgage (and changes) wrong answer. ex. `/images/h1.png`
-/*
-let hangmanImg = `images/h${guesses}.png`;
-let imageElement = document.querySelector("#hangman");
-imageElement.setAttribute("src", hangmanImg);
-*/
 let messageBox = document.querySelector("#message");
 
 // DOM-node: logs a message when the game is over
@@ -53,15 +47,18 @@ function startGame() {
   list.innerHTML = "";
   selectedWord = generateRandomWord();
   createLetterBoxes();
-  resetletterButtons();
-  resetPicture();
-  resetGuesses();
+  // Functions to reset the game, but did not get them to work as intended
+  // resetletterButtons();
+  // resetPicture();
+  // resetGuesses();
   let wordSplit = selectedWord.split("");
   console.log(wordSplit);
   wordLength = wordSplit.length;
   addLetterClickHandlers(selectedWord);
 }
 
+// Functions to reset the game, but could not get them to work as intended
+/*
 function resetletterButtons() {  
   for (var i = 0; i < letterBoxEls.length; i++) {
     letterBoxEls.item(i).children[0].disabled = false;
@@ -79,6 +76,7 @@ function resetGuesses() {
    correctLetters = 0;
    guesses = 0;   
 }
+*/
 
 // Function that runs when you press a letters and guesses the letter
 function checkLetter(letter, selectedWord) {
@@ -105,20 +103,19 @@ function correctGuessAction(letter, letters) {
   }
 }
 
+// Function for the boxes
 function showBoxes(occurances, letters) {
   let boxes = document.querySelector("#letterBoxes").children[0].children;
   occurances.forEach(element => {
     let letter = letters[element];
     boxes[element].children[0].setAttribute("value", letter);
-    boxes[element].children[0].setAttribute("disable", false);
+    boxes[element].children[0].setAttribute("disable", "");
   });
 }
 
 // Function for wrong answers and pictures
 function wrongGuessAction() {
   guesses++;
-  // for testing
-  console.log(guesses);
   let hangmanImg = `images/h${guesses}.png`;
   let imageElement = document.querySelector("#hangman");
   imageElement.setAttribute("src", hangmanImg);
