@@ -5,7 +5,7 @@ let guesses = 0;
 let selectedWord = "";
 
 // Array: whith the words
-const wordList = ["HELLO", "GOODBYE", "HAAAAANGMAAAN"];
+const wordList = ["ZORRO", "SKI", "YACHT", "ZOMBIE"];
 
 let messageBox = document.querySelector("#message");
 
