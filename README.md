@@ -1,6 +1,6 @@
 krooknet.com/u03
 
-to reset the game, reset the browser
+to reset the game, click "start a new game"
 have fun!
 
 
