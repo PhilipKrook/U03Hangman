@@ -3,9 +3,10 @@ let correctLetters = 0;
 let wordLength = 0;
 let guesses = 0;
 let selectedWord = "";
+let isGameDone = false;
 
 // Array: whith the words
-const wordList = ["ZORRO", "SKI", "YACHT", "ZOMBIE"];
+const wordList = ["ZORRO", "SKI", "YACHT", "ZOMBIE", "CORONA", "PANDEMI", "APOCALYPSE"];
 
 let messageBox = document.querySelector("#message");
 
@@ -41,42 +42,30 @@ function createLetterBoxes() {
   }
 }
 
-// Function for start game and select a random word
+// Function for start game and select a random word, also calls the reset functions
 function startGame() {
+   if (isGameDone) {
+    resetGuesses();
+    clickDisable();
+    uptImg();
+   }
   let list = document.querySelector("#letterBoxes > ul");
   list.innerHTML = "";
   selectedWord = generateRandomWord();
   createLetterBoxes();
-  // Functions to reset the game, but did not get them to work as intended
-  // resetletterButtons();
-  // resetPicture();
-  // resetGuesses();
   let wordSplit = selectedWord.split("");
   console.log(wordSplit);
   wordLength = wordSplit.length;
-  addLetterClickHandlers(selectedWord);
 }
 
-// Functions to reset the game, but could not get them to work as intended
-/*
-function resetletterButtons() {  
-  for (var i = 0; i < letterBoxEls.length; i++) {
-    letterBoxEls.item(i).children[0].disabled = false;
-    console.log(letterBoxEls.item(i).children[0])
-  }
-}
-
-function resetPicture() {
-  let hangmanImg = `images/h0.png`;
-  let imageElement = document.querySelector("#hangman");
-  imageElement.setAttribute("src", hangmanImg);
-}
-
+// Function to reset variables
 function resetGuesses() {
-   correctLetters = 0;
-   guesses = 0;   
+  correctLetters = 0;
+  wordLength = 0;
+  guesses = 0;
+  selectedWord = "";
+  messageBox.innerHTML = "";
 }
-*/
 
 // Function that runs when you press a letters and guesses the letter
 function checkLetter(letter, selectedWord) {
@@ -100,36 +89,71 @@ function correctGuessAction(letter, letters) {
   showBoxes(occurances, letters);
   if (correctLetters === wordLength) {
     messageBox.innerHTML = "YOU WIN!";
+    isGameDone = true;
   }
+}
+
+// Function for wrong answers and pictures
+function wrongGuessAction() {
+  guesses++;
+  uptImg();
+  if (guesses === 6) {
+    messageBox.innerHTML = msgHolderEl;
+    isGameDone = true;
+  }
+}
+
+// Function to update/reset the image(s)
+function uptImg () {
+  let hangmanImg = `images/h${guesses}.png`;
+  let imageElement = document.querySelector("#hangman");
+  imageElement.setAttribute("src", hangmanImg);
 }
 
 // Function for the boxes
 function showBoxes(occurances, letters) {
   let boxes = document.querySelector("#letterBoxes").children[0].children;
-  occurances.forEach(element => {
+  occurances.forEach((element) => {
     let letter = letters[element];
     boxes[element].children[0].setAttribute("value", letter);
     boxes[element].children[0].setAttribute("disable", "");
   });
 }
 
-// Function for wrong answers and pictures
-function wrongGuessAction() {
-  guesses++;
-  let hangmanImg = `images/h${guesses}.png`;
-  let imageElement = document.querySelector("#hangman");
-  imageElement.setAttribute("src", hangmanImg);
-  if (guesses === 6) {
-    messageBox.innerHTML = msgHolderEl;
-  }
-}
-
 // Function for click handlers
 function addLetterClickHandlers(selectedWord) {
   for (var i = 0; i < letterBoxEls.length; i++) {
-    letterBoxEls.item(i).children[0].addEventListener("click", event => {
+    letterBoxEls.item(i).children[0].addEventListener("click", (event) => {
       event.srcElement.setAttribute("disabled", "");
       checkLetter(event.srcElement.value, selectedWord);
     });
+  }
+}
+
+// Removes the "disabled attribute" from buttons
+function clickDisable() {
+  for (var i = 0; i < letterBoxEls.length; i++) {
+    letterBoxEls.item(i).children[0].removeAttribute("disabled", "");    
+  }
+}
+
+// Function to reset click handlers
+function addLetterClickEvent() {
+  for (var i = 0; i < letterBoxEls.length; i++) {
+    letterBoxEls.item(i).children[0].addEventListener("click", (event) => {
+      checkLetterTwo(event.srcElement);
+    });
+  }
+}
+
+// Function that runs when you press a letters and guesses the letter
+function checkLetterTwo(letterBtn) {
+  let letter = letterBtn.value;
+  letterBtn.setAttribute("disabled", "disabled");
+  let letters = selectedWord.split("");
+  if (letters.indexOf(letter) !== -1) {
+    correctGuessAction(letter, letters);
+  } else {
+    wrongGuessAction();
   }
 }
